@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -8,11 +9,18 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class ListComponent implements OnInit {
   public breedList:any[] = [];
+  public searchForm!:FormGroup;
 
-  constructor(private apiService: ApiService) { }
+  constructor(
+    private apiService: ApiService,
+    private fb: FormBuilder,
+    ) { }
 
   ngOnInit(): void {
     this.getAllBreed();
+    this.searchForm = this.fb.group({
+      search:  ['', Validators.required ],
+    });
 
   }
 
@@ -29,8 +37,6 @@ export class ListComponent implements OnInit {
               subCategory: entry[1],
             })
           })
-
-          const lengthArray = aux.length;
           this.breedList = aux;
         }
       }
@@ -77,5 +83,21 @@ export class ListComponent implements OnInit {
       }
     }
   }
+
+
+  onChange(event:any){
+    if(event.length >0){
+
+      this.breedList = this.breedList.filter(todo => {
+        const todoText = todo.breed.toLowerCase();
+        const searchText = event.toLowerCase();
+        return todoText.includes(searchText)
+      })
+    }else {
+      this.getAllBreed()
+    }
+
+  }
+
 
 }
