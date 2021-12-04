@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-md-6 mx-auto">
+      <div class="card w-100" *ngIf="breedItem">
+        <h2>Welcome !!!</h2>
+
+        <!-- CARD -->
+        <div class="card-body">
+          <h4 class="card-title">
+            Breed:
+            {{ breedItem?.breed }}
+          </h4>
+          <div *ngIf="breedItem?.subCategory.length > 0">
+            Sub Breeds:
+            <ul>
+              <li *ngFor="let it of breedItem?.subCategory">
+                {{ it }}
+              </li>
+            </ul>
+          </div>
+          <app-img [breed]="breedItem?.breed"></app-img>
+        </div>
+
+        <!-- LIST -->
+        <a routerLink="/list" class="btn btn-outline-dark m-4">Breed List</a>
+      </div>
+    </div>
+  </div>
+</div>

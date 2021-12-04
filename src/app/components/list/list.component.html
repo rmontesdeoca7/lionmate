@@ -1,0 +1,51 @@
+<a routerLink="" class="ms-5">< Back</a>
+<div class="container">
+  <div class="row">
+    <h2 class="mt-5">Breed List</h2>
+    <div class="col-md-2 mt-3" *ngFor="let item of breedList">
+      <div class="card">
+        <div class="card-body">
+          {{ item.breed }}
+        </div>
+        <ul >
+          <li *ngFor="let it of item?.subCategory">
+            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="modalImg(item.breed, it)">
+
+              {{it }}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ title }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-3 mt-4" *ngFor="let img of images">
+            <div class="card">
+              <img [src]="img" class="card-img-top" height="100" width="100"alt="...">
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="favorite(title)">Marcar como favorita &#9733;</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
